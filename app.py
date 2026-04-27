@@ -10,7 +10,6 @@ import torch
 import torch.nn.functional as F
 import timm
 import numpy as np
-import cv2
 from PIL import Image
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
@@ -115,7 +114,7 @@ def generate_gradcam(model, image_np, target_class):
     targets = [ClassifierOutputTarget(target_class)]
     grayscale_cam = cam(input_tensor=input_tensor, targets=targets)[0]
 
-    img_resized = cv2.resize(image_np, (IMAGE_SIZE, IMAGE_SIZE))
+    img_resized = np.array(Image.fromarray(image_np).resize((IMAGE_SIZE, IMAGE_SIZE)))
     img_float = img_resized.astype(np.float32) / 255.0
     cam_image = show_cam_on_image(img_float, grayscale_cam, use_rgb=True)
 
@@ -156,9 +155,8 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file is not None:
     # Load image
-    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-    image_bgr = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
-    image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
+    image_pil = Image.open(uploaded_file).convert("RGB")
+    image_rgb = np.array(image_pil)
 
     # Predict
     with st.spinner("Analyzing image..."):
