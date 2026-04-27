@@ -50,14 +50,19 @@ inference_transform = transforms.Compose([
 # Download model from Google Drive if not present
 # ============================================================
 def download_model_weights():
+    if os.path.exists(WEIGHT_PATH) and os.path.getsize(WEIGHT_PATH) > 1_000_000:
+        return True
     if os.path.exists(WEIGHT_PATH):
-        return True
-    url = f"https://drive.google.com/uc?export=download&id={GDRIVE_FILE_ID}&confirm=t"
+        os.remove(WEIGHT_PATH)
     try:
-        import urllib.request
+        import gdown
         with st.spinner("Downloading model weights (first time only, ~55MB)..."):
-            urllib.request.urlretrieve(url, WEIGHT_PATH)
-        return True
+            gdown.download(id=GDRIVE_FILE_ID, output=WEIGHT_PATH, quiet=False)
+        if os.path.exists(WEIGHT_PATH) and os.path.getsize(WEIGHT_PATH) > 1_000_000:
+            return True
+        else:
+            st.error("Download failed — file too small. Check Google Drive sharing settings.")
+            return False
     except Exception as e:
         st.error(f"Failed to download model: {e}")
         return False
@@ -71,7 +76,7 @@ def load_model():
     if not download_model_weights():
         return None
     model = timm.create_model(MODEL_NAME, pretrained=False, num_classes=NUM_CLASSES, drop_rate=0.3)
-    checkpoint = torch.load(WEIGHT_PATH, map_location="cpu")
+   checkpoint = torch.load(WEIGHT_PATH, map_location="cpu", weights_only=False)
     state_dict = {k: v.float() for k, v in checkpoint["model_state_dict"].items()}
     model.load_state_dict(state_dict)
     model.eval()
