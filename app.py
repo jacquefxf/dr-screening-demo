@@ -27,7 +27,7 @@ CLASS_DESCRIPTIONS = {
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
 IMAGENET_STD = [0.229, 0.224, 0.225]
 WEIGHT_PATH = "best_model_fold0_fp16.pth"
-GDRIVE_FILE_ID = "1fyLnDJGE6E8yZrtriZRwymOlI2mqXULb""
+GDRIVE_FILE_ID = "1fyLnDJGE6E8yZrtriZRwymOlI2mqXULb"
 
 inference_transform = transforms.Compose([
     transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
