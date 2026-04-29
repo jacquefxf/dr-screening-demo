@@ -168,8 +168,8 @@ if uploaded_file is not None:
                 f"- **Input Resolution:** {IMAGE_SIZE}x{IMAGE_SIZE}\n"
                 f"- **Training:** 5-Fold CV, best fold used for demo\n"
                 f"- **Inference:** TTA (4 geometric flips averaged)\n"
-                f"- **OOF Macro F1:** 0.7636\n"
-                f"- **OOF Accuracy:** 85.69%"
+                f"- **OOF Macro F1:** 0.764\n"
+                f"- **OOF Accuracy:** 85.97%"
             )
 else:
     st.info("Upload a retinal fundus image to get started.")
