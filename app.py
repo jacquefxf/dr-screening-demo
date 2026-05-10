@@ -138,7 +138,7 @@ def generate_gradcam(model, image_pil, target_class):
 
 st.set_page_config(page_title="DR Screening - Team 6thSense", page_icon="eye", layout="wide")
 st.title("Diabetic Retinopathy Screening")
-st.markdown("**Team 6thSense** - Elijah, KaiXi, Garet, Isaac | National AI Competition 2026")
+st.markdown("**Team 6thSense** - Elijah Foong, Kim Kyung Jin, Kai Xi, Isaac Chey | National AI Competition 2026 - Computing Track")
 st.warning(
     "Disclaimer: This is a research prototype built for the National AI Competition 2026. "
     "It is NOT a medical diagnosis tool and should not be used for clinical decision-making. "
