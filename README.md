@@ -1,6 +1,6 @@
 # Diabetic Retinopathy Screening Demo
 
-**Team 6thSense** — Elijah Foong, Kim Kyung Jin, Kai Xi, Isaac Chey
+**Team 6thSense** — Elijah Foong, Kim Kyung Jin, Kai Xi, Isaac Chey |
 National AI Competition 2026 — Computing Track
 
 A deep learning demo that classifies retinal fundus images into 5 DR severity grades using a ConvNeXt-Tiny model trained with 5-fold cross-validation.
